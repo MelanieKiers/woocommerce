@@ -11,19 +11,21 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
 
-            - name: Read diff file names
-              id: getDiff
+            - name: Create diff
               run: |
+                  mkdir tmp
                   git fetch origin trunk
-                  git diff origin/trunk..HEAD --name-only > mydiff
-                  echo "mydiff = "
-                  cat mydiff
-                  echo "::set-output name=diff::$(cat mydiff)"
+                  git diff origin/trunk..HEAD --name-only > tmp/diff
+            - name: Read diff contents
+              id: diff
+              uses: juliangruber/read-file-action@v1
+              with:
+                  path: tmp/diff
             - name: Append changelog
               uses: ./.github/actions/changelogger-pull-request
               with:
                   branch: add/changelogger-pr-number
-                  diff: ${{ steps.getDiff.outputs.diff }}
+                  diff: ${{ steps.diff.outputs.content }}
 
     build:
         name: Build zip for PR
