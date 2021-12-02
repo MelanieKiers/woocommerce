@@ -11,13 +11,19 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
 
-            - name: Print diff
+            - name: Get diff
               run: |
                   echo "Printing diff"
                   git fetch origin trunk
-                  git diff origin/trunk..HEAD > mydiff
+                  git diff origin/trunk..HEAD --name-only > mydiff
                   echo "mydiff = "
                   cat mydiff
+            - name: Read diff
+              run: |
+                  echo "Reading diff"
+                  echo "mydiff = "
+                  cat mydiff
+
     build:
         name: Build zip for PR
         runs-on: ubuntu-latest
