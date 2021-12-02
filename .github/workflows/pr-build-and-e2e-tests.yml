@@ -15,13 +15,12 @@ jobs:
               id: getDiff
               run: |
                   git fetch origin trunk
-                  git diff origin/trunk..HEAD --name-only > mydiff
-                  echo "::set-output name=diff::$(cat mydiff)"
+                  echo "::set-output name=diff::$(git diff origin/trunk..HEAD --name-only)"
             - name: Append changelog
               uses: ./.github/actions/changelogger-pull-request
               with:
                   branch: add/changelogger-pr-number
-                  diff: v${{ steps.getDiff.outputs.diff }}
+                  diff: ${{ steps.getDiff.outputs.diff }}
 
     build:
         name: Build zip for PR
