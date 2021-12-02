@@ -1,6 +1,12 @@
 name: Build zip for PR
 on: pull_request
 jobs:
+    changelogger:
+        name: Validate and append changelog entry
+        runs-on: ubuntu-latest
+        steps:
+            - name: First step
+              run: echo "Hello World"
     build:
         name: Build zip for PR
         runs-on: ubuntu-latest
@@ -78,7 +84,7 @@ jobs:
                   E2E_SLACK_TOKEN: ${{ secrets.E2E_SLACK_TOKEN }}
                   E2E_SLACK_CHANNEL: ${{ secrets.E2E_SLACK_CHANNEL }}
               run: pnpx wc-e2e test:e2e
-                  
+
     api-tests-run:
         name: Runs API tests.
         runs-on: ubuntu-18.04

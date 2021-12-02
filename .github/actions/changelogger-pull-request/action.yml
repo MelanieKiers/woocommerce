@@ -1,0 +1,8 @@
+name: 'WooCommerce Changelogger Pull Request'
+author: WooCommerce
+description: 'Validate and append PR number to changelogger descriptions'
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    args:
+        - ${{ inputs.generate-zip }}
