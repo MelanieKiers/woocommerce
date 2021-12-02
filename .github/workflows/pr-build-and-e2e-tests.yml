@@ -14,7 +14,7 @@ jobs:
             - name: Print diff
               run: |
                   echo "Printing diff"
-                  get fetch origin trunk
+                  git fetch origin trunk
                   git diff origin/main..HEAD > mydiff
                   echo "mydiff = "
                   cat mydiff
