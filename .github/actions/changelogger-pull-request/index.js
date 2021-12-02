@@ -1,12 +1,9 @@
 const core = require( '@actions/core' );
 
-const branch = core.getInput( 'branch' );
+const branch = core.getInput( 'branch' ).replace( '/', '-' );
 const diff = core.getInput( 'diff' );
 
-const rxString = `.*(?=\/changelog\/${ branch }).*`;
-const rx = new RegExp( rxString, 'gm' );
-
-console.log( rxString );
+const rx = new RegExp( `.*(?=\/changelog\/${ branch }).*`, 'gm' );
 
 if ( ! rx.test( diff ) ) {
 	console.log( 'no changelog detected' );
