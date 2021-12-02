@@ -13,16 +13,17 @@ jobs:
 
             - name: Create diff
               run: |
-                  npm install -g pnpm
-                  pnpm install
+                  npm install @actions/core
                   mkdir tmp
                   git fetch origin trunk
                   git diff origin/trunk..HEAD --name-only > tmp/diff
+
             - name: Read diff contents
               id: diff
               uses: juliangruber/read-file-action@v1
               with:
                   path: tmp/diff
+
             - name: Append changelog
               uses: ./.github/actions/changelogger-pull-request
               with:
