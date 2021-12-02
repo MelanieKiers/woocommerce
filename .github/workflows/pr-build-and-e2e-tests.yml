@@ -11,18 +11,17 @@ jobs:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
 
-            - name: Get diff
+            - name: Get diff file names
               run: |
-                  echo "Printing diff"
                   git fetch origin trunk
                   git diff origin/trunk..HEAD --name-only > mydiff
                   echo "mydiff = "
                   cat mydiff
-            - name: Read diff
-              run: |
-                  echo "Reading diff"
-                  echo "mydiff = "
-                  cat mydiff
+            - name: Append changelog
+              uses: ./.github/actions/changelogger-pull-request
+              with:
+                  branch: add/changelogger-pr-number
+                  diff: cat mydiff
 
     build:
         name: Build zip for PR
