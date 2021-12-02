@@ -15,7 +15,7 @@ jobs:
               run: |
                   echo "Printing diff"
                   git fetch origin trunk
-                  git diff origin/main..HEAD > mydiff
+                  git diff origin/trunk..HEAD > mydiff
                   echo "mydiff = "
                   cat mydiff
     build:
