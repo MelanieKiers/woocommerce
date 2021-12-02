@@ -16,8 +16,6 @@ jobs:
               run: |
                   git fetch origin trunk
                   git diff origin/trunk..HEAD --name-only > mydiff
-                  echo "mydiff = "
-                  cat mydiff
                   echo "::set-output name=diff::$(cat mydiff)"
             - name: Append changelog
               uses: ./.github/actions/changelogger-pull-request
