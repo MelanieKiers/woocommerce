@@ -24,7 +24,7 @@ jobs:
             - name: Append changelog
               uses: ./.github/actions/changelogger-pull-request
               with:
-                  branch: add/changelogger-pr-number
+                  branch: ${{ github.head_ref }}
                   diff: ${{ steps.diff.outputs.content }}
 
     build:

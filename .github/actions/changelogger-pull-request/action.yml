@@ -5,10 +5,9 @@ inputs:
     branch:
         description: 'Pull request branch'
         required: true
+    diff:
+        description: 'Name only PR diff'
+        required: true
 runs:
-    using: 'composite'
-    steps:
-        - run: |
-              echo Hello ${{ inputs.branch }}.
-              echo Hello ${{ inputs.diff }}.
-          shell: bash
+    using: 'node12'
+    main: 'index.js'
